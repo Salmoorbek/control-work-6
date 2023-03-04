@@ -1,8 +1,8 @@
 package controlwoork;
 
 public class Login {
-    private boolean state = false;
-    private String regMess =" ";
+    private boolean state;
+    private String regMess;
 
     public Login(boolean status) {
         this.state = status;

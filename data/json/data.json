@@ -272,7 +272,14 @@
     "dateName": "22 марта 2022 г."
   },
   {
-    "tasks": [],
+    "tasks": [
+      {
+        "taskId": "Tellus",
+        "name": "Leo egestas vehicul.",
+        "description": "Ex. vitae. montes, elit. ex, proin.",
+        "taskType": "COMMON"
+      }
+    ],
     "date": {
       "year": 2023,
       "month": 3,
@@ -290,7 +297,14 @@
     "dateName": "24 марта 2022 г."
   },
   {
-    "tasks": [],
+    "tasks": [
+      {
+        "taskId": "Mus",
+        "name": "Congue. eros.",
+        "description": "Vel, convallis. nec. faucibus leo finibus leo. tempor nec lectus. venenatis sollicitudin.",
+        "taskType": "SHOPPING"
+      }
+    ],
     "date": {
       "year": 2023,
       "month": 3,
