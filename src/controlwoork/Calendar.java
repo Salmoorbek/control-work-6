@@ -1,6 +1,7 @@
 package controlwoork;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,16 +12,16 @@ import static util.FileService.readDays;
 public class Calendar {
     private int day;
     private int today;
-    private String month;
     private int weekDay;
+    private String month;
     private ArrayList<Day> days = new ArrayList<>();
-    private LocalDate localDate = LocalDate.now();
 
     public Calendar() {
+        LocalDate localDate = LocalDate.now();
         day = localDate.lengthOfMonth();
         today = localDate.getDayOfMonth();
-        month = localDate.getMonth().getDisplayName(TextStyle.FULL_STANDALONE, new Locale("ru"));
         weekDay = localDate.minusDays(localDate.getDayOfMonth() - 1).getDayOfWeek().getValue();
+        month = localDate.getMonth().getDisplayName(TextStyle.FULL_STANDALONE, new Locale("ru"));
         for(int i = 1; i <= localDate.lengthOfMonth(); i++){
             days.add(new Day(LocalDate.of(localDate.getYear(), localDate.getMonth(), i)));
         }
@@ -65,13 +66,5 @@ public class Calendar {
 
     public void setDays(ArrayList<Day> days) {
         this.days = days;
-    }
-
-    public LocalDate getLocalDate() {
-        return localDate;
-    }
-
-    public void setLocalDate(LocalDate localDate) {
-        this.localDate = localDate;
     }
 }

@@ -14,7 +14,7 @@ public class Day {
     public Day(LocalDate date) {
         tasks = new ArrayList<>();
         this.date = date;
-        dateName = date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG).withLocale(new Locale("ru")));
+        dateName = getDateNameWithFormat();
     }
     public Day(){
         this(LocalDate.now());
@@ -42,5 +42,8 @@ public class Day {
 
     public void setDateName(String dateName) {
         this.dateName = dateName;
+    }
+    public String getDateNameWithFormat(){
+        return date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG).withLocale(new Locale("ru")));
     }
 }

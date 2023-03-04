@@ -20,12 +20,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ControlWork extends BasicServer {
-    private static Calendar calendarModel = new Calendar();
+    private static Calendar calendar = new Calendar();
     private final static Configuration freemarker = initFreeMarker();
 
     public ControlWork(String host, int port) throws IOException {
         super(host, port);
-        registerGet("/", this::calendarHandler);
+        registerGet("/", this::homeIndex);
+        registerGet("/calendar", this::calendarHandler);
+        registerGet("/login", this::loginGet);
+        registerPost("/login", this::loginPost);
         registerGet("/tasks", this::tasksHandler);
         registerGet("/task/add", this::addTask);
         registerPost("/task/add", this::addTaskPost);
@@ -34,93 +37,127 @@ public class ControlWork extends BasicServer {
         registerGet("/task/delete", this::deleteTask);
     }
 
+    private void homeIndex(HttpExchange exchange) {
+        renderTemplate(exchange, "login.html", new Login(false));
+    }
+
+    private void loginPost(HttpExchange exchange) {
+        String raw = getBody(exchange);
+        boolean check = false;
+        var model = new UserModel();
+        var users = model.getUsers();
+        Map<String, String> parsed = Utils.parseUrlEncoded(raw, "&");
+        for (User e : users) {
+            if(e.getMail().equalsIgnoreCase(parsed.get("mail"))){
+                if(e.getPassword().equalsIgnoreCase(parsed.get("password"))){
+                    check = true;
+                }
+            }
+        }
+        if(check)
+            redirect303(exchange, "/calendar");
+        else
+            renderTemplate(exchange, "login.html", new Login(true));
+    }
+
+    private void loginGet(HttpExchange exchange) {
+        renderTemplate(exchange, "login.html", new Login(false));
+    }
+
     private void deleteTask(HttpExchange exchange) {
-        String queryParams = getQueryParams(exchange);
-        Map<String, String> params = Utils.parseUrlEncoded(queryParams, "&");
-        for (int i = 0; i < calendarModel.getDays().size(); i++){
-            if(params.get("date").equalsIgnoreCase(calendarModel.getDays().get(i).getDate().toString())){
-                for (int j = 0; j < calendarModel.getDays().get(i).getTasks().size(); j++){
-                    if (params.get("taskId").equalsIgnoreCase(calendarModel.getDays().get(i).getTasks().get(j).getTaskId())){
-                        calendarModel.getDays().get(i).getTasks().remove(j);
+        String query = getQueryParams(exchange);
+        Map<String, String> parsed = Utils.parseUrlEncoded(query, "&");
+        for (int i = 0; i < calendar.getDays().size(); i++){
+            if(parsed.get("date").equalsIgnoreCase(calendar.getDays().get(i).getDate().toString())){
+                for (int j = 0; j < calendar.getDays().get(i).getTasks().size(); j++){
+                    if (parsed.get("taskId").equals(calendar.getDays().get(i).getTasks().get(j).getTaskId())){
+                        calendar.getDays().get(i).getTasks().remove(j);
                         break;
                     }
                 }
                 break;
             }
         }
-        FileService.writeFile(calendarModel.getDays());
-        redirect303(exchange, "/tasks?date=" + params.get("date"));
+        FileService.writeFile(calendar.getDays());
+        redirect303(exchange, "/tasks?date=" + parsed.get("date"));
     }
 
     private void addTaskPost(HttpExchange exchange) {
         String raw = getBody(exchange);
         Map<String, String> parsed = Utils.parseUrlEncoded(raw, "&");
-        for (int i = 0; i < calendarModel.getDays().size(); i++){
-            if(parsed.get("day").equalsIgnoreCase(calendarModel.getDays().get(i).getDate().toString())){
-                calendarModel.getDays().get(i).getTasks().add(new Task(parsed.get("taskId"), parsed.get("name"), parsed.get("description"), Arrays.stream(Type.values()).filter(e -> e.getName().equalsIgnoreCase(parsed.get("selected"))).findFirst().get()));
-                break;
+        if(parsed.get("name") != null && parsed.get("description") != null) {
+            for (int i = 0; i < calendar.getDays().size(); i++){
+                if(parsed.get("day").equals(calendar.getDays().get(i).getDate().toString())){
+                    calendar.getDays().get(i).getTasks().add(new Task(parsed.get("taskId"), parsed.get("name"), parsed.get("description"), Arrays.stream(Type.values()).filter(e -> e.getName().equalsIgnoreCase(parsed.get("selected"))).findFirst().get()));
+                    break;
+                }
             }
+            FileService.writeFile(calendar.getDays());
+            redirect303(exchange, "/tasks?date=" + parsed.get("day"));
+        }else {
+            renderTemplate(exchange, "error.html", calendar);
         }
-        FileService.writeFile(calendarModel.getDays());
-        redirect303(exchange, "/tasks?date=" + parsed.get("day"));
     }
 
     private void addTask(HttpExchange exchange) {
         Map<String,Object> data = new HashMap<>();
-        String queryParams = getQueryParams(exchange);
-        Map<String, String> params = Utils.parseUrlEncoded(queryParams, "&");
+        String query = getQueryParams(exchange);
+        Map<String, String> parsed = Utils.parseUrlEncoded(query, "&");
         Task task = new Task();
 
-        for (var day: calendarModel.getDays()) {
-            if(params.get("date").equalsIgnoreCase(day.getDate().toString())){
-                data.put("day", day);
-                data.put("task", task);
-                data.put("types", Type.values());
-                break;
+            for (var day : calendar.getDays()) {
+                if (parsed.get("date").equals(day.getDate().toString())) {
+                    data.put("day", day);
+                    data.put("task", task);
+                    data.put("types", Type.values());
+                    break;
+                }
             }
-        }
-        renderTemplate(exchange, "newTask.html", data);
+            renderTemplate(exchange, "newTask.html", data);
+
+
     }
 
     private void changeTask(HttpExchange exchange) {
         String raw = getBody(exchange);
         Map<String, String> parsed = Utils.parseUrlEncoded(raw, "&");
-        for (int i = 0; i < calendarModel.getDays().size(); i++){
-            if(parsed.get("day").equalsIgnoreCase(calendarModel.getDays().get(i).getDate().toString())){
-                for (int j = 0; j < calendarModel.getDays().get(i).getTasks().size(); j++){
-                    if (parsed.get("taskId").equalsIgnoreCase(calendarModel.getDays().get(i).getTasks().get(j).getTaskId())){
-                        calendarModel.getDays().get(i).getTasks().set(j, new Task(parsed.get("taskId"), parsed.get("name"), parsed.get("description"), Arrays.stream(Type.values()).filter(e -> e.getName().equalsIgnoreCase(parsed.get("selected"))).findFirst().get()));
+        for (int i = 0; i < calendar.getDays().size(); i++){
+            if(parsed.get("day").equalsIgnoreCase(calendar.getDays().get(i).getDate().toString())){
+                for (int j = 0; j < calendar.getDays().get(i).getTasks().size(); j++){
+                    if (parsed.get("taskId").equals(calendar.getDays().get(i).getTasks().get(j).getTaskId())){
+                        calendar.getDays().get(i).getTasks().set(j, new Task(parsed.get("taskId"), parsed.get("name"), parsed.get("description"), Arrays.stream(Type.values()).filter(e -> e.getName().equalsIgnoreCase(parsed.get("selected"))).findFirst().get()));
                         break;
                     }
                 }
                 break;
             }
         }
-        FileService.writeFile(calendarModel.getDays());
+        FileService.writeFile(calendar.getDays());
         redirect303(exchange, "/tasks?date=" + parsed.get("day"));
     }
 
     private void tasksHandler(HttpExchange exchange) {
         String queryParams = getQueryParams(exchange);
-        Map<String, String> params = Utils.parseUrlEncoded(queryParams, "&");
+        Map<String, String> parsed = Utils.parseUrlEncoded(queryParams, "&");
         Day currentDay = new Day();
-        for (var day: calendarModel.getDays()) {
-            if(params.get("date").equalsIgnoreCase(day.getDate().toString())){
-                currentDay = day;
+
+            for (var day : calendar.getDays()) {
+                if (parsed.get("date").equals(day.getDate().toString())) {
+                    currentDay = day;
+                }
             }
-        }
-        renderTemplate(exchange, "tasks.html", currentDay);
+            renderTemplate(exchange, "tasks.html", currentDay);
     }
 
     private void taskHandler(HttpExchange exchange) {
         Map<String,Object> data = new HashMap<>();
         String query = getQueryParams(exchange);
-        Map<String, String> params = Utils.parseUrlEncoded(query, "&");
+        Map<String, String> parsed = Utils.parseUrlEncoded(query, "&");
         Task task;
-        for (var day: calendarModel.getDays()) {
-            if(params.get("date").equalsIgnoreCase(day.getDate().toString())){
+        for (var day: calendar.getDays()) {
+            if(parsed.get("date").equalsIgnoreCase(day.getDate().toString())){
                 for (int j = 0; j < day.getTasks().size(); j++){
-                    if (params.get("taskId").equalsIgnoreCase(day.getTasks().get(j).getTaskId())){
+                    if (parsed.get("taskId").equals(day.getTasks().get(j).getTaskId())){
                         task = day.getTasks().get(j);
                         data.put("day", day);
                         data.put("task", task);

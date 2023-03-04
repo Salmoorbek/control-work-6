@@ -40,7 +40,14 @@
     "dateName": "3 марта 2022 г."
   },
   {
-    "tasks": [],
+    "tasks": [
+      {
+        "taskId": "E",
+        "name": "Ac lorem.",
+        "description": "Erat, semper. facilisis turpis, commodo dolor, lacus. vulputate, euismod. massa, maecenas tellus aliquam. vehicula.",
+        "taskType": "JOB"
+      }
+    ],
     "date": {
       "year": 2023,
       "month": 3,
@@ -91,6 +98,12 @@
         "name": "Fringilla venenatis posuere.",
         "description": "Egestas. nibh tellus, auctor, facilisis aliquet interdum. nisl primis amet, arcu ridiculus feugiat nisi.ewfwewe",
         "taskType": "JOB"
+      },
+      {
+        "taskId": "Pharetr",
+        "name": "Vel pharetra gravida. quis.",
+        "description": "Leo lectus, lobortis, vulputate. porta ac sagittis velit volutpat odio.",
+        "taskType": "COMMON"
       }
     ],
     "date": {
@@ -137,7 +150,14 @@
     "dateName": "13 марта 2022 г."
   },
   {
-    "tasks": [],
+    "tasks": [
+      {
+        "taskId": "Congue",
+        "name": "Quam, nec amet.",
+        "description": "Lobortis. velit. sapien eget aliquam egestas ultricies, euismod.",
+        "taskType": "COMMON"
+      }
+    ],
     "date": {
       "year": 2023,
       "month": 3,
@@ -146,7 +166,14 @@
     "dateName": "14 марта 2022 г."
   },
   {
-    "tasks": [],
+    "tasks": [
+      {
+        "taskId": "I",
+        "name": "Praesent sem, fames ut.",
+        "description": "Turpis, imperdiet. interdum. eu, urna consectetur fusce.",
+        "taskType": "SHOPPING"
+      }
+    ],
     "date": {
       "year": 2023,
       "month": 3,
@@ -155,7 +182,20 @@
     "dateName": "15 марта 2022 г."
   },
   {
-    "tasks": [],
+    "tasks": [
+      {
+        "taskId": "Ligula",
+        "name": "Ac, non, dolor, tincidunt.",
+        "description": "Egestas. posuere quisque nunc. nunc. eu. erat, lacinia ultricies, a.",
+        "taskType": "COMMON"
+      },
+      {
+        "taskId": "Viverra",
+        "name": "Aenean odio.",
+        "description": "Egestas. non, quis faucibus, phasellus null.",
+        "taskType": "COMMON"
+      }
+    ],
     "date": {
       "year": 2023,
       "month": 3,
@@ -164,7 +204,14 @@
     "dateName": "16 марта 2022 г."
   },
   {
-    "tasks": [],
+    "tasks": [
+      {
+        "taskId": "Nisi",
+        "name": "Tortor. elementum.",
+        "description": "Etiam est purus, eros ex molestie. neque. sollicitudin. lorem. egestas.",
+        "taskType": "JOB"
+      }
+    ],
     "date": {
       "year": 2023,
       "month": 3,

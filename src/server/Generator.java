@@ -70,7 +70,7 @@ public final class Generator {
         return email.replace(" ", "");
     }
 
-    public static String makePassword() {
+    public static String makeId() {
         return removeExtra.matcher(makeGibberish(0,1))
                 .replaceAll("")
                 .replace(" ", "");

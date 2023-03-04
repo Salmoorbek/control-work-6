@@ -15,7 +15,7 @@ public class Task {
         this.taskType = taskType;
     }
     public Task() {
-        this(Generator.makePassword(),
+        this(Generator.makeId(),
                 Generator.makeName(),
                 Generator.makeDescription(),
                 null);

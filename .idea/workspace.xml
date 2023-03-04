@@ -4,29 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="483694b5-1aa0-4506-b4ae-7bcdb8c8e7d9" name="Changes" comment="start project">
-      <change afterPath="$PROJECT_DIR$/data/calendar.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/data.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/lorem.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/newTask.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/task.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/tasks.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/controlwoork/Calendar.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/controlwoork/ControlWork.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/controlwoork/Day.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/controlwoork/Task.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/controlwoork/Type.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/server/BasicServer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/server/ContentType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/server/Generator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/server/ResponseCodes.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/server/RouteHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/util/FileService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/util/Utils.java" afterDir="false" />
+    <list default="true" id="483694b5-1aa0-4506-b4ae-7bcdb8c8e7d9" name="Changes" comment="finished cw">
+      <change afterPath="$PROJECT_DIR$/data/error.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/login.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/user.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/controlwoork/LocalDateTimeJsonAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/controlwoork/Login.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/controlwoork/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/controlwoork/UserModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/control-work-6.iml" beforeDir="false" afterPath="$PROJECT_DIR$/control-work-6.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/calendar.html" beforeDir="false" afterPath="$PROJECT_DIR$/data/calendar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/data.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controlwoork/Calendar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controlwoork/Calendar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controlwoork/ControlWork.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controlwoork/ControlWork.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controlwoork/Day.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controlwoork/Day.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controlwoork/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controlwoork/Task.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/Generator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/Generator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,6 +32,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
+        <option value="HTML File" />
         <option value="Class" />
       </list>
     </option>
@@ -55,9 +51,10 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "/Users/salmoorbek/Desktop/control-work-6/src/server",
+    "last_opened_file_path": "/Users/salmoorbek/Desktop/control-work-6/data",
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
@@ -66,8 +63,8 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/server" />
       <recent name="$PROJECT_DIR$/data" />
+      <recent name="$PROJECT_DIR$/src/server" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="util" />
@@ -97,12 +94,20 @@
       <option name="project" value="LOCAL" />
       <updated>1677906056843</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="finished cw">
+      <created>1677924476650</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1677924476650</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="init commit" />
     <MESSAGE value="start project" />
-    <option name="LAST_COMMIT_MESSAGE" value="start project" />
+    <MESSAGE value="finished cw" />
+    <option name="LAST_COMMIT_MESSAGE" value="finished cw" />
   </component>
 </project>
