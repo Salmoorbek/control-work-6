@@ -83,7 +83,14 @@
     "dateName": "7 марта 2022 г."
   },
   {
-    "tasks": [],
+    "tasks": [
+      {
+        "taskId": "Bibendum",
+        "name": "Bibendum ridiculus lectus. justo.",
+        "description": "Eu. lobortis. magna, nec eros, quis justo, blandit ullamcorper.",
+        "taskType": "SHOPPING"
+      }
+    ],
     "date": {
       "year": 2023,
       "month": 3,

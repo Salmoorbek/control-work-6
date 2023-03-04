@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class FileService {
     public static void writeFile(ArrayList<Day> days){
-        Path path = Paths.get("./data/data.json");
+        Path path = Paths.get("./data/json/data.json");
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         Day[] result = days.stream().toArray(Day[]::new);
         String json = gson.toJson(result);
@@ -25,7 +25,7 @@ public class FileService {
     }
 
     public static Day[] readDays(){
-        Path path = Paths.get("./data/data.json");
+        Path path = Paths.get("./data/json/data.json");
         String json = "";
         try{
             json = Files.readString(path);

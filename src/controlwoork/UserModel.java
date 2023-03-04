@@ -25,7 +25,7 @@ public class UserModel {
     }
 
     public static User[] readUser() {
-        Path path = Paths.get("./data/user.json");
+        Path path = Paths.get("./data/json/user.json");
         String json = "";
         try {
             json = Files.readString(path);
